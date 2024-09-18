@@ -6,8 +6,8 @@
 @import '../assets/styles/main.scss';
 
 h1 {
-  font-family: 'Raleway';
-  font-weight: 500;
-  font-style: normal;
+  background-color: $background;
+  padding: 0;
+  margin: 0;
 }
 </style>

@@ -1,8 +1,6 @@
 <script setup></script>
 
-<template>
-  <div></div>
-</template>
+<template>Cocktail random</template>
 
 <style lang="scss" scoped>
 @import '../assets/styles/main.scss';

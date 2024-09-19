@@ -1,6 +1,16 @@
-<script setup></script>
+<script setup>
+import AppLayout from '@/components/AppLayout.vue'
+</script>
 
-<template><h1>Home Page</h1></template>
+<template>
+  <app-layout imgUrl="/src/assets/img/bg-1.jpg">
+    <div class="wrapper">
+      <div class="info">
+        <div class="title">Choose your drink</div>
+      </div>
+    </div>
+  </app-layout>
+</template>
 
 <style lang="scss" scoped>
 @import '../assets/styles/main.scss';

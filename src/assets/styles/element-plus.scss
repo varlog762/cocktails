@@ -1,0 +1,16 @@
+.select {
+  .el-select__wrapper {
+    background-color: $background;
+  }
+
+  .el-select__selected-item {
+    color: $text;
+  }
+}
+
+div {
+  .el-select-dropdown__item.is-selected {
+    color: $accent;
+    font-weight: bold;
+  }
+}

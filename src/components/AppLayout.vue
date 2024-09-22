@@ -50,7 +50,7 @@ const props = defineProps({
   font-family: 'Raleway', 'Arial', sans-serif;
   color: $text;
 
-  &:hover {
+  n &:hover {
     background-color: darken($accent, 10%);
   }
 

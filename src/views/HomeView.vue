@@ -8,8 +8,10 @@ import { useRootStore } from '@/stores/root'
 const rootStore = useRootStore()
 rootStore.getIngredients()
 
-const { ingredients } = storeToRefs(rootStore)
+const { ingredients, cocktails } = storeToRefs(rootStore)
 const ingredient = ref(null)
+
+const getCocktails = () => rootStore.getCocktails(ingredient.value)
 </script>
 
 <template>
@@ -20,6 +22,7 @@ const ingredient = ref(null)
         <div class="line"></div>
         <div class="select-wrapper">
           <el-select
+            @change="getCocktails"
             v-model="ingredient"
             placeholder="Choose your drink"
             class="select"
@@ -34,6 +37,11 @@ const ingredient = ref(null)
             </el-option>
           </el-select>
         </div>
+        <div class="text">
+          Try our delicious cocktail recipes for every occasion. Find delicious cocktail recipes by
+          ingredient through our cocktail generator.
+        </div>
+        <img src="/src/assets/img/homeview-cocktails.png" alt="Cocktails" class="img" />
       </div>
     </div>
   </app-layout>
@@ -60,10 +68,21 @@ h1 {
 }
 
 .select-wrapper {
-  margin-top: 50px;
+  margin: 50px 0;
 }
 
 .select {
   width: 220px;
+}
+
+.text {
+  max-width: 516px;
+  margin: 0 auto;
+  color: $text-muted;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 225%;
+  letter-spacing: 0.1em;
+  margin-bottom: 60px;
 }
 </style>

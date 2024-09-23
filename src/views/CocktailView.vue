@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import AppLayout from '@/components/AppLayout.vue'
+</script>
 
 <template>Cocktail</template>
 

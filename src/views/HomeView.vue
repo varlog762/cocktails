@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import AppLayout from '@/components/AppLayout.vue'
+import CocktailThumb from '@/components/CocktailThumb.vue'
 import { useRootStore } from '@/stores/root'
 
 const rootStore = useRootStore()
@@ -17,7 +18,7 @@ const getCocktails = () => rootStore.getCocktails(ingredient.value)
 <template>
   <app-layout imgUrl="/src/assets/img/bg-1.jpg">
     <div class="wrapper">
-      <div class="info">
+      <div v-if="!ingredients || !cocktails.length" class="info">
         <div class="title">Choose your drink</div>
         <div class="line"></div>
         <div class="select-wrapper">
@@ -42,6 +43,17 @@ const getCocktails = () => rootStore.getCocktails(ingredient.value)
           ingredient through our cocktail generator.
         </div>
         <img src="/src/assets/img/homeview-cocktails.png" alt="Cocktails" class="img" />
+      </div>
+      <div v-else class="info">
+        <div class="title">COCKTAILS WITH {{ ingredient }}</div>
+        <div class="line"></div>
+        <div class="cocktails">
+          <cocktail-thumb
+            v-for="cocktail in cocktails"
+            :key="cocktail.idDrink"
+            :cocktail="cocktail"
+          ></cocktail-thumb>
+        </div>
       </div>
     </div>
   </app-layout>
@@ -84,5 +96,15 @@ h1 {
   line-height: 225%;
   letter-spacing: 0.1em;
   margin-bottom: 60px;
+}
+
+.cocktails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 60px;
 }
 </style>

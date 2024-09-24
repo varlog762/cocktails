@@ -5,6 +5,14 @@ const props = defineProps({
   imgUrl: {
     type: String,
     required: true
+  },
+  backFunction: {
+    type: Function,
+    required: true
+  },
+  isBackButtonVisible: {
+    type: Boolean,
+    default: true
   }
 })
 </script>
@@ -13,8 +21,15 @@ const props = defineProps({
   <div class="root">
     <div :style="`background-image: url(${imgUrl})`" class="img"></div>
     <div class="main">
-      <el-button class="btn-back" :icon="Back" size="large" circle />
-      <el-button class="btn">Get random cocktail</el-button>
+      <el-button
+        v-if="isBackButtonVisible"
+        @click="backFunction"
+        class="btn-back"
+        :icon="Back"
+        size="large"
+        circle
+      />
+      <router-link to="/random"><el-button class="btn">Get random cocktail</el-button></router-link>
       <slot></slot>
     </div>
   </div>
@@ -68,5 +83,10 @@ const props = defineProps({
   color: $text;
   border: 1px solid $text;
   background-color: $background;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
 }
 </style>

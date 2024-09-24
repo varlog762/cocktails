@@ -13,8 +13,7 @@ export const useRootStore = defineStore('root', {
     ingredients: [],
     ingredient: null,
     cocktails: [],
-    cocktail: null,
-    cocktailIngredientsWithMeasures: []
+    cocktail: null
   }),
   actions: {
     async getIngredients() {
@@ -34,10 +33,9 @@ export const useRootStore = defineStore('root', {
       this.cocktail = data?.data?.drinks.at(0)
     },
 
-    setIngredient(ingredient) {
-      if (!ingredient) return
-
-      this.ingredient = ingredient
+    clearChoice() {
+      this.ingredient = null
+      this.cocktails = []
     }
   }
 })

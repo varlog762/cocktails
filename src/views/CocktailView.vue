@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 
 import { useRootStore } from '@/stores/root'
 import AppLayout from '@/components/AppLayout.vue'
+import { goBack } from '@/utils'
 
 const rootStore = useRootStore()
 const { cocktail } = storeToRefs(rootStore)
@@ -28,7 +29,7 @@ const ingredients = computed(() => {
 
 <template>
   <template v-if="cocktail">
-    <app-layout :imgUrl="cocktail.strDrinkThumb">
+    <app-layout :imgUrl="cocktail.strDrinkThumb" :backFunction="goBack">
       <div class="wrapper">
         <div class="info">
           <h2 class="title cocktail-name">{{ cocktail.strDrink }}</h2>

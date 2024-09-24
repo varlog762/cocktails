@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import AppLayout from '@/components/AppLayout.vue'
@@ -11,12 +12,22 @@ rootStore.getIngredients()
 const { ingredients, ingredient, cocktails } = storeToRefs(rootStore)
 
 const getCocktails = () => rootStore.getCocktails(rootStore.ingredient)
+
+const clearChoice = () => rootStore.clearChoice()
+
+const isIngredientChosen = computed(
+  () => ingredient.value !== null && ingredient.value !== undefined
+)
 </script>
 
 <template>
-  <app-layout imgUrl="/src/assets/img/bg-1.jpg">
+  <app-layout
+    imgUrl="/src/assets/img/bg-1.jpg"
+    :backFunction="clearChoice"
+    :isBackButtonVisible="isIngredientChosen"
+  >
     <div class="wrapper">
-      <div v-if="!ingredients || !cocktails.length" class="info">
+      <div v-if="!ingredient || !cocktails" class="info">
         <h1 class="title">Choose your drink</h1>
         <div class="line"></div>
         <div class="select-wrapper">

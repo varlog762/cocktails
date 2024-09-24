@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import AppLayout from '@/components/AppLayout.vue'
@@ -9,25 +8,25 @@ import { useRootStore } from '@/stores/root'
 const rootStore = useRootStore()
 rootStore.getIngredients()
 
-const { ingredients, cocktails } = storeToRefs(rootStore)
-const ingredient = ref(null)
+const { ingredients, ingredient, cocktails } = storeToRefs(rootStore)
 
-const getCocktails = () => rootStore.getCocktails(ingredient.value)
+const getCocktails = () => rootStore.getCocktails(rootStore.ingredient)
 </script>
 
 <template>
   <app-layout imgUrl="/src/assets/img/bg-1.jpg">
     <div class="wrapper">
       <div v-if="!ingredients || !cocktails.length" class="info">
-        <div class="title">Choose your drink</div>
+        <h1 class="title">Choose your drink</h1>
         <div class="line"></div>
         <div class="select-wrapper">
           <el-select
             @change="getCocktails"
-            v-model="ingredient"
+            v-model="rootStore.ingredient"
             placeholder="Choose your drink"
             class="select"
             size="large"
+            filterable
           >
             <el-option
               v-for="item in ingredients"
@@ -62,12 +61,6 @@ const getCocktails = () => rootStore.getCocktails(ingredient.value)
 <style lang="scss" scoped>
 @import '../assets/styles/main.scss';
 
-h1 {
-  background-color: $background;
-  padding: 0;
-  margin: 0;
-}
-
 .wrapper {
   display: flex;
   justify-content: center;
@@ -80,7 +73,7 @@ h1 {
 }
 
 .select-wrapper {
-  margin: 50px 0;
+  margin-bottom: 50px;
 }
 
 .select {
@@ -100,10 +93,9 @@ h1 {
 
 .cocktails {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  max-height: 400px;
+  max-height: 65vh;
   overflow-y: auto;
   margin-top: 60px;
 }

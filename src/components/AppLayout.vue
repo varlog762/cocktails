@@ -1,4 +1,5 @@
 <script setup>
+import { Back } from '@element-plus/icons-vue'
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   imgUrl: {
@@ -12,6 +13,7 @@ const props = defineProps({
   <div class="root">
     <div :style="`background-image: url(${imgUrl})`" class="img"></div>
     <div class="main">
+      <el-button class="btn-back" :icon="Back" size="large" circle />
       <el-button class="btn">Get random cocktail</el-button>
       <slot></slot>
     </div>
@@ -57,5 +59,14 @@ const props = defineProps({
   &:active {
     color: $text-muted;
   }
+}
+
+.btn-back {
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  color: $text;
+  border: 1px solid $text;
+  background-color: $background;
 }
 </style>

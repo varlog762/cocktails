@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 
 import { useRootStore } from '@/stores/root'
 import AppLayout from '@/components/AppLayout.vue'
-import { goBack } from '@/utils'
+import { useGoBack } from '@/composables/useGoBack'
 
 const rootStore = useRootStore()
 const { cocktail } = storeToRefs(rootStore)
@@ -25,6 +25,8 @@ const ingredients = computed(() => {
         `${ingredient[1]} | ${cocktail.value[`strMeasure${idx + 1}`] ?? 'Add to your choice'}`
     )
 })
+
+const goBack = useGoBack()
 </script>
 
 <template>

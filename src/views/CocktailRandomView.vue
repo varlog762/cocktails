@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
 
 import AppLayout from '@/components/AppLayout.vue'
 import { useGoBack } from '@/composables/useGoBack'
 import apiClient from '@/services/apiClient'
-import { RANDOM_COCKTAIL_URL } from '../constants'
+import { RANDOM_COCKTAIL_URL, INGREDIENT_THUMBNAIL } from '../constants'
 
 const cocktail = ref(null)
 
@@ -14,26 +16,41 @@ const getRandomCocktail = async () => {
 }
 getRandomCocktail()
 
+const ingredients = computed(() => {
+  return Object.entries(cocktail.value)
+    .filter(([key, value]) => key.startsWith('strIngredient') && value)
+    .map((ingredient) => ingredient[1])
+})
+
 const goBack = useGoBack()
 </script>
 
 <template>
   <app-layout
+    v-if="cocktail"
     :imgUrl="cocktail?.strDrinkThumb"
     :backFunction="goBack"
     :randomCocktailFunction="getRandomCocktail"
   >
-    <div v-if="cocktail" class="wrapper">
+    <div class="wrapper">
       <div class="info">
-        <h2 class="title cocktail-name">{{ cocktail.strDrink }}</h2>
+        <h2 class="title cocktail-name">{{ cocktail?.strDrink }}</h2>
         <div class="line"></div>
-        <ul class="ingredient-list">
-          <!-- <li class="ingredient" v-for="ingredient in ingredients" :key="ingredient">
-            <img src="/src/assets/icons/heart.svg" alt="heart picture" />
-            <div class="ingredient-name">{{ ingredient }}</div>
-          </li> -->
-        </ul>
-        <div class="instructions">{{ cocktail.strInstructions }}</div>
+        <div class="slider">
+          <swiper :slides-per-view="3" :space-between="50" class="swiper">
+            <swiper-slide v-for="ingredient in ingredients" :key="ingredient">
+              <div class="ingredient-item">
+                <img
+                  class="ingredient-pic"
+                  :src="`${INGREDIENT_THUMBNAIL}${ingredient}-small.png`"
+                  :alt="`${ingredient} picture`"
+                />
+                <div class="ingredient-name">{{ ingredient }}</div>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+        <div class="instructions">{{ cocktail?.strInstructions }}</div>
       </div>
     </div>
   </app-layout>
@@ -53,22 +70,28 @@ const goBack = useGoBack()
   text-align: center;
 }
 
-.ingredient-list {
-  li:last-child {
-    margin-bottom: 80px;
-  }
+.slider {
+  padding: 50px 0;
 }
 
-.ingredient {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: 0.1em;
-  color: $text;
-  margin-bottom: 20px;
-  text-align: left;
+.swiper {
+  width: 586px;
+}
+
+.ingredient-item {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
+}
+
+.ingredient-name {
+  text-align: center;
+}
+
+.ingredient-pic {
+  width: 100px;
+  height: 100px;
 }
 
 .instructions {

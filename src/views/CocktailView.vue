@@ -1,19 +1,20 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { storeToRefs } from 'pinia'
 
-import { useRootStore } from '@/stores/root'
 import AppLayout from '@/components/AppLayout.vue'
+import apiClient from '@/services/apiClient'
 import { useGoBack } from '@/composables/useGoBack'
+import { useGetRandomCocktail } from '@/composables/useGetRandomCocktail'
+import { COCKTAIL_BY_ID_URL } from '../constants'
 
-const rootStore = useRootStore()
-const { cocktail } = storeToRefs(rootStore)
+const cocktail = ref(null)
 const route = useRoute()
 const id = route.params.id
 
-const getCocktail = () => {
-  rootStore.getCocktailById(id)
+const getCocktail = async () => {
+  const [response] = await apiClient.getData(`${COCKTAIL_BY_ID_URL}${id}`)
+  cocktail.value = response
 }
 getCocktail()
 
@@ -27,11 +28,16 @@ const ingredients = computed(() => {
 })
 
 const goBack = useGoBack()
+const getRandomCocktail = useGetRandomCocktail()
 </script>
 
 <template>
   <template v-if="cocktail">
-    <app-layout :imgUrl="cocktail.strDrinkThumb" :backFunction="goBack">
+    <app-layout
+      :imgUrl="cocktail.strDrinkThumb"
+      :backFunction="goBack"
+      :randomCocktailFunction="getRandomCocktail"
+    >
       <div class="wrapper">
         <div class="info">
           <h2 class="title cocktail-name">{{ cocktail.strDrink }}</h2>

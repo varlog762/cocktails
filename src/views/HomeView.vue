@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import AppLayout from '@/components/AppLayout.vue'
 import CocktailThumb from '@/components/CocktailThumb.vue'
 import { useRootStore } from '@/stores/root'
+import { useGetRandomCocktail } from '@/composables/useGetRandomCocktail'
 
 const rootStore = useRootStore()
 rootStore.getIngredients()
@@ -18,6 +19,8 @@ const clearChoice = () => rootStore.clearChoice()
 const isIngredientChosen = computed(
   () => ingredient.value !== null && ingredient.value !== undefined
 )
+
+const getRandomCocktail = useGetRandomCocktail()
 </script>
 
 <template>
@@ -25,6 +28,7 @@ const isIngredientChosen = computed(
     imgUrl="/src/assets/img/bg-1.jpg"
     :backFunction="clearChoice"
     :isBackButtonVisible="isIngredientChosen"
+    :randomCocktailFunction="getRandomCocktail"
   >
     <div class="wrapper">
       <div v-if="!ingredient || !cocktails" class="info">

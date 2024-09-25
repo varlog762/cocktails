@@ -10,6 +10,10 @@ const props = defineProps({
     type: Function,
     required: true
   },
+  randomCocktailFunction: {
+    type: Function,
+    required: true
+  },
   isBackButtonVisible: {
     type: Boolean,
     default: true
@@ -29,7 +33,7 @@ const props = defineProps({
         size="large"
         circle
       />
-      <router-link to="/random"><el-button class="btn">Get random cocktail</el-button></router-link>
+      <el-button @click="randomCocktailFunction" class="btn">Get random cocktail</el-button>
       <slot></slot>
     </div>
   </div>

@@ -19,7 +19,7 @@ const goBack = useGoBack()
 
 <template>
   <app-layout
-    imgUrl="/src/assets/img/bg-1.jpg"
+    :imgUrl="cocktail?.strDrinkThumb"
     :backFunction="goBack"
     :randomCocktailFunction="getRandomCocktail"
   >

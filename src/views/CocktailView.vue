@@ -6,7 +6,7 @@ import AppLayout from '@/components/AppLayout.vue'
 import apiClient from '@/services/apiClient'
 import { useGoBack } from '@/composables/useGoBack'
 import { useGetRandomCocktail } from '@/composables/useGetRandomCocktail'
-import { COCKTAIL_BY_ID_URL } from '../constants'
+import { COCKTAIL_BY_ID_URL, C } from '../constants'
 
 const cocktail = ref(null)
 const route = useRoute()
@@ -23,7 +23,7 @@ const ingredients = computed(() => {
     .filter(([key, value]) => key.startsWith('strIngredient') && value)
     .map(
       (ingredient, idx) =>
-        `${ingredient[1]} | ${cocktail.value[`strMeasure${idx + 1}`] ?? 'Add to your choice'}`
+        `${ingredient[1]} | ${cocktail.value[`strMeasure${idx + 1}`] ?? C.DEFAULT_MEASURE}`
     )
 })
 

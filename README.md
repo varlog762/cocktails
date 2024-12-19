@@ -40,3 +40,18 @@ Follow these steps to get started with the project:
    npm run dev
 4. Open the app in your browser at [http://localhost:5173](http://localhost:5173).
 
+## Available Scripts
+
+- **npm run dev:** Starts the development server.
+- **npm run build:** Builds the app for production.
+- **npm run preview:** Previews the production build.
+- **npm run lint:** Runs ESLint and automatically fixes linting issues.
+- **npm run format:** Formats the codebase using Prettier.
+
+## Future Plans
+
+- Add a Favorites feature to save preferred cocktails.
+- Implement a Search function to find cocktails by name.
+- Add more visual effects and animations to improve the user experience.
+
+Happy mixing! 🎉

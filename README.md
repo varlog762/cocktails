@@ -31,3 +31,12 @@ Follow these steps to get started with the project:
    ```bash
    git clone https://github.com/varlog762/cocktails.git
    cd cocktails
+
+2. Install dependencies:
+   ```bash
+   npm install
+3. Run the development server:
+   ```bash
+   npm run dev
+4. Open the app in your browser at [http://localhost:5173](http://localhost:5173).
+

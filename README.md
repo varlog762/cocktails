@@ -1,35 +1,33 @@
-# cocktails
+# Cocktails 🍹
 
-This template should help get you started developing with Vue 3 in Vite.
+**Cocktails** is a user-friendly cocktail guide where you can explore recipes for your favorite drinks. Whether you're hosting a party or just looking for inspiration, this app has you covered!
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Ingredient-Based Search**: Select an ingredient, and the app will show a list of cocktails containing it.
+- **Random Cocktail**: Feeling adventurous? Click the "Get Random Cocktail" button to discover a surprise drink recipe.
+- **Detailed Recipes**: Each cocktail comes with a full recipe, ingredients list, and preparation instructions.
 
-## Customize configuration
+## Data Source
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+The application uses the [TheCocktailDB API](https://www.thecocktaildb.com/api/json/v1/1/) to fetch cocktail recipes and details.
 
-## Project Setup
+## Technologies Used
 
-```sh
-npm install
-```
+This project is built using:
 
-### Compile and Hot-Reload for Development
+- [Vue 3](https://vuejs.org/) - A progressive JavaScript framework
+- [Vue Router](https://router.vuejs.org/) - For navigation
+- [Pinia](https://pinia.vuejs.org/) - State management
+- [Element Plus](https://element-plus.org/) - UI components
+- [Swiper](https://swiperjs.com/) - Carousel for enhanced visuals
+- [Axios](https://axios-http.com/) - For API requests
 
-```sh
-npm run dev
-```
+## Setup Instructions
 
-### Compile and Minify for Production
+Follow these steps to get started with the project:
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/varlog762/cocktails.git
+   cd cocktails

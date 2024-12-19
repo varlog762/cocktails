@@ -2,6 +2,9 @@
 
 **Cocktails** is a user-friendly cocktail guide where you can explore recipes for your favorite drinks. Whether you're hosting a party or just looking for inspiration, this app has you covered!
 
+![SCR-20241219-lgck](https://github.com/user-attachments/assets/1b91c527-4f89-418d-b70b-df5d7d848934)
+
+
 ## Features
 
 - **Ingredient-Based Search**: Select an ingredient, and the app will show a list of cocktails containing it.

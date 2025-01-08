@@ -1,6 +1,6 @@
 <script setup>
 import { Back } from '@element-plus/icons-vue'
-// eslint-disable-next-line no-unused-vars
+
 const props = defineProps({
   imgUrl: {
     type: String,

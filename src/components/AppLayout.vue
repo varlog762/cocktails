@@ -1,12 +1,12 @@
 <script setup>
 import { Back } from '@element-plus/icons-vue'
 
-const props = defineProps({
+defineProps({
   imgUrl: {
     type: String,
     required: true
   },
-  backFunction: {
+  cb: {
     type: Function,
     required: true
   },
@@ -27,7 +27,7 @@ const props = defineProps({
     <div class="main">
       <el-button
         v-if="isBackButtonVisible"
-        @click="backFunction"
+        @click="cb"
         class="btn-back"
         :icon="Back"
         size="large"

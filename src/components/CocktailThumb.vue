@@ -1,6 +1,5 @@
 <script setup>
-
-const props = defineProps({
+const { cocktail } = defineProps({
   cocktail: {
     type: Object,
     required: true

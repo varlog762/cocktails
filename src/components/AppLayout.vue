@@ -1,19 +1,33 @@
 <script setup>
+/**
+ * AppLayout.vue
+ * This component provides a layout for the application, including:
+ * - A background image specified via the `imgUrl` prop.
+ * - A back button, controlled by the `isBackButtonVisible` prop, with a click handler passed as the `cb` prop.
+ * - A "Get random cocktail" button, triggered by the `randomCocktailFunction` prop.
+ * - A slot for child components to render their content within the layout.
+ */
+
 import { Back } from '@element-plus/icons-vue'
 
+// Defining props for the component
 defineProps({
   imgUrl: {
+    // URL for the background image
     type: String,
     required: true
   },
+  // Callback function triggered by the back button
   cb: {
     type: Function,
     required: true
   },
+  // Function to fetch a random cocktail, triggered by the "Get random cocktail" button
   randomCocktailFunction: {
     type: Function,
     required: true
   },
+  // Boolean to control the visibility of the back button (default is true)
   isBackButtonVisible: {
     type: Boolean,
     default: true
@@ -22,9 +36,13 @@ defineProps({
 </script>
 
 <template>
+  <!-- Root container -->
   <div class="root">
+    <!-- Background image container -->
     <div :style="`background-image: url(${imgUrl})`" class="img"></div>
+    <!-- Main content container -->
     <div class="main">
+      <!-- Back button: visible if `isBackButtonVisible` is true -->
       <el-button
         v-if="isBackButtonVisible"
         @click="cb"
@@ -33,7 +51,10 @@ defineProps({
         size="large"
         circle
       />
+
+      <!-- Button to fetch a random cocktail -->
       <el-button @click="randomCocktailFunction" class="btn">Get random cocktail</el-button>
+      <!-- Slot for rendering child content within the layout -->
       <slot></slot>
     </div>
   </div>

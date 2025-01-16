@@ -1,6 +1,14 @@
 import axios from 'axios'
 
 export default {
+  /**
+   * Performs a GET request to the given URL and returns an array of cocktail
+   * objects. If the request fails or the response does not contain the
+   * expected 'drinks' property, an empty array is returned.
+   *
+   * @param {String} url - The URL to fetch the data from
+   * @return {Promise<Array>} - An array of cocktail objects
+   */
   async getData(url) {
     try {
       const data = await axios.get(url)

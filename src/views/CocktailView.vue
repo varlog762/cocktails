@@ -1,4 +1,12 @@
 <script setup>
+/**
+ * CocktailView.vue
+ *
+ * This component represents the detailed view of a selected cocktail.
+ * It displays the cocktail's image, name, list of ingredients (with measurements), and preparation instructions.
+ * Users can navigate back to the previous page or discover a random cocktail.
+ */
+
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -8,16 +16,31 @@ import { useGoBack } from '@/composables/useGoBack'
 import { useGetRandomCocktail } from '@/composables/useGetRandomCocktail'
 import { COCKTAIL_BY_ID_URL, C } from '../constants'
 
+// Reactive state for the selected cocktail
+// Stores the details of the cocktail
 const cocktail = ref(null)
+
+// Extract the cocktail ID from the route parameters
 const route = useRoute()
 const id = route.params.id
 
+/**
+ * Fetches a cocktail by ID from the API and stores it in the reactive state.
+ *
+ * The cocktail ID is obtained from the route parameters.
+ */
 const getCocktail = async () => {
   const [response] = await apiClient.getData(`${COCKTAIL_BY_ID_URL}${id}`)
   cocktail.value = response
 }
+
+// Automatically fetch cocktail data on component initialization
 getCocktail()
 
+/**
+ * Computed property to extract and format ingredients with their measurements.
+ * Filters out null or undefined ingredients and combines them with their corresponding measurements.
+ */
 const ingredients = computed(() => {
   return Object.entries(cocktail.value)
     .filter(([key, value]) => key.startsWith('strIngredient') && value)
@@ -27,12 +50,17 @@ const ingredients = computed(() => {
     )
 })
 
+// Utility for navigating back to the previous page
 const goBack = useGoBack()
+
+// Utility for fetching a random cocktail
 const getRandomCocktail = useGetRandomCocktail()
 </script>
 
 <template>
+  <!-- Check if the cocktail data is loaded before rendering the page -->
   <template v-if="cocktail">
+    <!-- Layout component with dynamic background and actions -->
     <app-layout
       :imgUrl="cocktail.strDrinkThumb"
       :backFunction="goBack"
@@ -40,14 +68,19 @@ const getRandomCocktail = useGetRandomCocktail()
     >
       <div class="wrapper">
         <div class="info">
+          <!-- Cocktail name -->
           <h2 class="title cocktail-name">{{ cocktail.strDrink }}</h2>
           <div class="line"></div>
+
+          <!-- List of ingredients -->
           <ul class="ingredient-list">
             <li class="ingredient" v-for="ingredient in ingredients" :key="ingredient">
               <img src="/src/assets/icons/heart.svg" alt="heart picture" />
               <div class="ingredient-name">{{ ingredient }}</div>
             </li>
           </ul>
+
+          <!-- Instructions for preparing the cocktail -->
           <div class="instructions">{{ cocktail.strInstructions }}</div>
         </div>
       </div>

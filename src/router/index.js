@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import CocktailView from '@/views/CocktailView.vue'
-import CocktailRandomView from '@/views/CocktailRandomView.vue'
+import RandomCocktailView from '@/views/RandomCocktailVue.vue'
 import { ROUTER_PATHS } from '@/constants'
 
 const router = createRouter({
@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: ROUTER_PATHS.RANDOM,
       name: ROUTER_PATHS.RANDOM,
-      component: CocktailRandomView
+      component: RandomCocktailView
     }
   ]
 })
